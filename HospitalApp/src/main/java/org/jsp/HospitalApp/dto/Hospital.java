@@ -1,6 +1,4 @@
 package org.jsp.HospitalApp.dto;
-
-<<<<<<< HEAD
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,15 +18,4 @@ public class Hospital {
 	private String gstno;
 	private List<Branch> branches;
 	
-=======
-import javax.persistence.Entity;
-
-@Entity
-public class Hospital {
-	private int id;
-	private String name;
-	private String founder;
-	private int yoe;
-	private int gst;
->>>>>>> 00dc1c217c5485a69d08ebfbc46dca48984efaa6
 }
