@@ -1,9 +1,5 @@
 package org.jsp.HospitalApp.dto;
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 51421952415f373939d7259e9c3305c247a60a6f
 import java.util.List;
 
 import javax.persistence.Entity;
