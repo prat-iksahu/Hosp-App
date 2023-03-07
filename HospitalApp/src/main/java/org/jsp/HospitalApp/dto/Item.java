@@ -1,10 +1,10 @@
 package org.jsp.HospitalApp.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity
@@ -15,7 +15,7 @@ public class Item {
 	private int id;
 	private String name,mfdate,exdate,batchno;
 	private double price;
-	private MedOrder medOrder;
+//	private MedOrder medOrder;
 	
 	
 
