@@ -1,5 +1,8 @@
 package org.jsp.HospitalApp.repository;
 
-public interface HospitalRepository  {
+import org.jsp.HospitalApp.dto.Hospital;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HospitalRepository extends JpaRepository<Hospital, Integer>  {
 
 }
