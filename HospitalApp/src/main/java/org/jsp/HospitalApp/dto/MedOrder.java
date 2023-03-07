@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 @Entity
 @Data
@@ -14,8 +16,10 @@ public class MedOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	String Orderdate,deliverydate;
-//	private List<Item> items;
-//	private EnCounter counter;
+	@OneToMany
+	private List<Item> items;
+	@ManyToOne
+	private Encounter counter;
 	
 
 }

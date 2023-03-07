@@ -19,5 +19,6 @@ public class Hospital {
 	private String gstno;
 	@OneToMany
 	private List<Branch> branches;
-	
+
+
 }

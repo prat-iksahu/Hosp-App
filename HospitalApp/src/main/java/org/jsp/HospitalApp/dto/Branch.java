@@ -2,11 +2,14 @@ package org.jsp.HospitalApp.dto;
 
 import java.util.List;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 @Entity
@@ -17,12 +20,15 @@ public class Branch {
 	private int id;
 	private String name,email;
 	private long phone;
-//	private List<EnCounter> counters;
-	@OneToOne
-	private Address address;
 	@ManyToOne
 	private Hospital hospital;
-//	private List<Staff> staffs;
-//	private List<Admin> admins;
+	@OneToOne
+	private Address address;
+	@OneToMany
+	private List<Encounter> counters;
+	@OneToMany
+	private List<Admin> admin;
+	@OneToMany
+	private List<Staff> staffs;
 	
 }
