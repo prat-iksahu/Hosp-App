@@ -15,7 +15,7 @@ public class MedOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	String Orderdate,deliverydate;
+	String orderdate,deliverydate;
 	@OneToMany
 	private List<Item> items;
 	@ManyToOne

@@ -19,22 +19,22 @@ public class HospitalController {
 	private HospitalRepository hospitalRepository;
 
 	@PostMapping("/hospital")
-	public Hospital saveBranch(@RequestBody Hospital hospital) {
+	public Hospital saveHospital(@RequestBody Hospital hospital) {
 		return hospitalRepository.save(hospital);
 	}
 
 	@PutMapping("/hospital")
-	public Hospital updateBranch(@RequestBody Hospital hospital) {
+	public Hospital updateHospital(@RequestBody Hospital hospital) {
 		return hospitalRepository.save(hospital);
 	}
 
 	@DeleteMapping("/hospital/{id}")
-	public void deleteBranch(@PathVariable int id) {
+	public void deleteHospital(@PathVariable int id) {
 		hospitalRepository.deleteById(id);
 	}
 
 	@GetMapping("/hospital/{id}")
-	public Hospital getBranch(@PathVariable int id) {
+	public Hospital getHospital(@PathVariable int id) {
 		return hospitalRepository.findById(id).get();
 	}
 

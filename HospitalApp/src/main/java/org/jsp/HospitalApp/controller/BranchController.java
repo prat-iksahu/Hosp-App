@@ -37,7 +37,8 @@ public class BranchController {
 
 	@GetMapping("/branch/{id}")
 	public Branch getBranch(@PathVariable int id) {
-		return branchRepository.findById(id).get();
+		Optional<Branch> optional=branchRepository.findById(id);
+		return optional.get();
 	}
 
 	@GetMapping("/branch/all")
