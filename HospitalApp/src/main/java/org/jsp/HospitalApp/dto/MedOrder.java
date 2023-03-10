@@ -9,17 +9,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+
 @Entity
 @Data
 public class MedOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	String orderdate,deliverydate;
+	String orderdate, deliverydate;
 	@OneToMany
 	private List<Item> items;
 	@ManyToOne
 	private Encounter counter;
-	
 
 }

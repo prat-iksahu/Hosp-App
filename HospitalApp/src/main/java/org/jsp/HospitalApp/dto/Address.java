@@ -13,7 +13,7 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name,place,city,state,country;
+	private String name, place, city, state, country;
 	private int pincode;
 	@OneToOne
 	private Branch branch;
