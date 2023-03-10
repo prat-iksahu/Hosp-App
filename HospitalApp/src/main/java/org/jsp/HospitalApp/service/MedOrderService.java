@@ -55,12 +55,12 @@ public class MedOrderService {
 		ResponseStructure<MedOrder> structure=new ResponseStructure<MedOrder>();
 		if(recMedOrder.isPresent()) {
 			structure.setBody(recMedOrder.get());
-			structure.setMessage("Person found ");
+			structure.setMessage("MedOrder found ");
 			structure.setCode(HttpStatus.FOUND.value());
 		}
 		else {
 			structure.setBody(null);
-			structure.setMessage("Person Not Found");
+			structure.setMessage("MedOrder Not Found");
 			structure.setCode(HttpStatus.NOT_FOUND.value());
 		}
 		return structure;
