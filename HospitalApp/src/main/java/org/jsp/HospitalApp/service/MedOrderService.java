@@ -9,7 +9,8 @@ import org.jsp.HospitalApp.dto.Person;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.stereotype.Service;
+@Service
 public class MedOrderService {
 	@Autowired
 	MedOrderDao dao;
@@ -54,12 +55,12 @@ public class MedOrderService {
 		ResponseStructure<MedOrder> structure=new ResponseStructure<MedOrder>();
 		if(recMedOrder.isPresent()) {
 			structure.setBody(recMedOrder.get());
-			structure.setMessage("Person found ");
+			structure.setMessage("MedOrder found ");
 			structure.setCode(HttpStatus.FOUND.value());
 		}
 		else {
 			structure.setBody(null);
-			structure.setMessage("Person Not Found");
+			structure.setMessage("MedOrder Not Found");
 			structure.setCode(HttpStatus.NOT_FOUND.value());
 		}
 		return structure;
