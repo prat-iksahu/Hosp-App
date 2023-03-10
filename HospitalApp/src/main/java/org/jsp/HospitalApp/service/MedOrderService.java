@@ -9,7 +9,8 @@ import org.jsp.HospitalApp.dto.Person;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.stereotype.Service;
+@Service
 public class MedOrderService {
 	@Autowired
 	MedOrderDao dao;
