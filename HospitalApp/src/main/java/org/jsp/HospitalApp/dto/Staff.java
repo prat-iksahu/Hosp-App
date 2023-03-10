@@ -14,7 +14,6 @@ public class Staff {
 	private int id;
 	private String name,designation,email,password;
 	private long phone;
-//	private int branch_id;
 	@ManyToOne
 	private Branch branch;
 	
