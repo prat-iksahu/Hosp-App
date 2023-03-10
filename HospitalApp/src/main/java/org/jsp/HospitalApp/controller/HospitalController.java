@@ -1,7 +1,6 @@
 package org.jsp.HospitalApp.controller;
 
 import java.util.List;
-
 import org.jsp.HospitalApp.dto.Hospital;
 import org.jsp.HospitalApp.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 public class HospitalController {
+	
 	@Autowired
 	private HospitalRepository hospitalRepository;
 

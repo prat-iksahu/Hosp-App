@@ -1,9 +1,11 @@
 package org.jsp.HospitalApp.controller;
-
 import java.util.List;
 
 import org.jsp.HospitalApp.dto.MedOrder;
+import org.jsp.HospitalApp.dto.Person;
+import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.repository.MedOrderRepository;
+import org.jsp.HospitalApp.service.MedOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,32 +17,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MedOrderController {
 	@Autowired
-	private MedOrderRepository medOrderRepository;
+	MedOrderService service;
 
 	@PostMapping("/medOrder")
-	public MedOrder saveMedOrder(@RequestBody MedOrder medOrder ) {
-		
-		return medOrderRepository.save(medOrder);
+	public ResponseStructure<MedOrder> saveMedOrder(@RequestBody MedOrder medOrder) {
+		return service.saveMedOrder(medOrder);
 	}
 
 	@PutMapping("/medOrder")
-	public MedOrder updateMedOrder(@RequestBody MedOrder medOrder ) {
-		return medOrderRepository.save(medOrder);
+	public ResponseStructure<MedOrder> updateMedOrder(@RequestBody MedOrder medOrder) {
+		return service.updateMedOrder(medOrder);
 	}
 
 	@DeleteMapping("/medOrder/{id}")
-	public void deleteMedOrder(@PathVariable int id) {
-		medOrderRepository.deleteById(id);
+	public ResponseStructure<String> deleteMedOrder(@PathVariable int id) {
+		
+		return service.deleteMedOrder(id);
 	}
 
 	@GetMapping("/medOrder/{id}")
-	public MedOrder getMedOrder(@PathVariable int id) {
-		return medOrderRepository.findById(id).get();
+	public ResponseStructure<MedOrder> findMedOrderById(@PathVariable int id) {
+		return service.findMedOrderById(id);
 	}
 
 	@GetMapping("/medOrder/all")
-	public List<MedOrder> getAll() {
-		return medOrderRepository.findAll();
+	public ResponseStructure<List<MedOrder>> findAllMedOrder() {
+		return service.findAllMedOrder() ;
 	}
 
 
