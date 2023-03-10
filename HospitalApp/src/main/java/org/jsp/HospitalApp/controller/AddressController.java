@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AddressController {
 	@Autowired
 	private AddressRepository addressRepository;
-	
+
 	@PostMapping("/address")
 	public Address saveAddress(@RequestBody Address address) {
-		
+
 		return addressRepository.save(address);
 	}
 
@@ -43,8 +43,5 @@ public class AddressController {
 	public List<Address> getAll() {
 		return addressRepository.findAll();
 	}
-	
-
-	
 
 }

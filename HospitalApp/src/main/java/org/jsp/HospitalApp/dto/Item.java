@@ -13,12 +13,9 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name,mfdate,exdate,batchno;
+	private String name, mfdate, exdate, batchno;
 	private double price;
 	@ManyToOne
 	private MedOrder medOrder;
-	
-	
 
 }
-
