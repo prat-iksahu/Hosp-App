@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.jsp.HospitalApp.dto.Staff;
 import org.jsp.HospitalApp.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
+@Repository
 public class StaffDao {
 	@Autowired
 	StaffRepository repository;
