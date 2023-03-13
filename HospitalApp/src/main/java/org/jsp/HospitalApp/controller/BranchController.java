@@ -6,6 +6,7 @@ import org.jsp.HospitalApp.dto.Branch;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,27 +21,27 @@ public class BranchController {
 	private BranchService branchService;
 
 	@PostMapping("/branch")
-	public ResponseStructure<Branch> saveBranch(@RequestBody Branch branch) {
+	public ResponseEntity<ResponseStructure<Branch>> saveBranch(@RequestBody Branch branch) {
 		return branchService.saveBranch(branch);
 	}
 
 	@PutMapping("/branch")
-	public ResponseStructure<Branch> updateBranch(@RequestBody Branch branch) {
+	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@RequestBody Branch branch) {
 		return branchService.updateBranch(branch);
 	}
 
 	@DeleteMapping("/branch/{id}")
-	public ResponseStructure<String> deleteBranch(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteBranch(@PathVariable int id) {
 		return branchService.deleteBranch(id);
 	}
 
 	@GetMapping("/branch/{id}")
-	public ResponseStructure<Branch> getBranch(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Branch>> getBranch(@PathVariable int id) {
 		return branchService.getBranch(id);
 	}
 
 	@GetMapping("/branch/all")
-	public ResponseStructure<List<Branch>> getAll() {
+	public ResponseEntity<ResponseStructure<List<Branch>>> getAll() {
 		return branchService.getAll();
 	}
 
