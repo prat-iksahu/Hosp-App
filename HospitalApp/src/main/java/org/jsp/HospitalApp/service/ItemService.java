@@ -8,30 +8,33 @@ import org.jsp.HospitalApp.dto.Item;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ItemService 
 {
 	@Autowired
 	ItemDao dao;
 
-	public ResponseStructure<Item> saveItem(Item item) {
+	public ResponseEntity<ResponseStructure<Item>> saveItem(Item item) {
 		ResponseStructure<Item> structure=new ResponseStructure<Item>();
 		structure.setBody(dao.saveItem(item));
 		structure.setMessage("Item saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
-		return structure;
+		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<Item> updateItem(Item item) {
+	public ResponseEntity<ResponseStructure<Item>> updateItem(Item item) {
 		ResponseStructure<Item> structure=new ResponseStructure<Item>();
 		structure.setBody(dao.updateItem(item));
 		structure.setMessage("Encounter Updated successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
-		return structure;
+		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.ACCEPTED);
 	}
 
 	
-	public ResponseStructure<String> deleteItem(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteItem(int id) {
 		Optional<Item> recItem=dao.findById(id);
 		ResponseStructure<String> structure=new ResponseStructure<String>();
 		if(recItem.isPresent()) {
@@ -46,10 +49,10 @@ public class ItemService
 			structure.setCode(HttpStatus.NOT_FOUND.value());
 		}
 		
-		return structure;
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<Item> findItem(int id) {
+	public ResponseEntity<ResponseStructure<Item>> getItem(int id) {
 		Optional<Item> recItem=dao.findById(id);
 		ResponseStructure<Item> structure=new ResponseStructure<Item>();
 		if(recItem.isPresent()) {
@@ -62,14 +65,14 @@ public class ItemService
 			structure.setMessage("Item Not Found");
 			structure.setCode(HttpStatus.NOT_FOUND.value());
 		}
-		return structure;
+		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<List<Item>> findAll() {
+	public ResponseEntity<ResponseStructure<List<Item>>> getAll() {
 		ResponseStructure<List<Item>> structure=new ResponseStructure<List<Item>>();
 		structure.setBody(dao.findAll());
 		structure.setMessage("List of Item ");
 		structure.setCode(HttpStatus.FOUND.value());
-		return structure;
+		return new ResponseEntity<ResponseStructure<List<Item>>>(structure, HttpStatus.FOUND);
 	}
 }

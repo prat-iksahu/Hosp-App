@@ -6,6 +6,7 @@ import org.jsp.HospitalApp.dto.Item;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,29 +22,29 @@ public class ItemController
 	ItemService service;
 
 	@PostMapping("/item")
-	public ResponseStructure<Item> saveItem(@RequestBody Item item) {
+	public ResponseEntity<ResponseStructure<Item>> saveItem(@RequestBody Item item) {
 		return service.saveItem(item);
 	}
 
 	@PutMapping("/item")
-	public ResponseStructure<Item> updateItem(@RequestBody Item item) {
+	public ResponseEntity<ResponseStructure<Item>> updateItem(@RequestBody Item item) {
 		
 		return service.updateItem(item);
 	}
 
 	@DeleteMapping("/item/{id}")
-	public ResponseStructure<String> deleteItem(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteItem(@PathVariable int id) {
 		return service.deleteItem(id);
 	}
 
 	@GetMapping("/item/{id}")
-	public ResponseStructure<Item> getItem(@PathVariable int id) {
-		return service.findItem(id);
+	public ResponseEntity<ResponseStructure<Item>> getItem(@PathVariable int id) {
+		return service.getItem(id);
 	}
 
 	@GetMapping("/item/all")
-	public ResponseStructure<List<Item>> getAll()
+	public ResponseEntity<ResponseStructure<List<Item>>> getAll()
 	{
-		return service.findAll() ;
+		return service.getAll() ;
 	}
 }

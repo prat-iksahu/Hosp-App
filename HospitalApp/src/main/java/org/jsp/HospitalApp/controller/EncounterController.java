@@ -6,6 +6,7 @@ import org.jsp.HospitalApp.dto.Encounter;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.service.EncounterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,29 +22,29 @@ public class EncounterController
 	EncounterService service;
 
 	@PostMapping("/encounter")
-	public ResponseStructure<Encounter> saveEncounter(@RequestBody Encounter encounter) {
+	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@RequestBody Encounter encounter) {
 		return service.saveEncounter(encounter);
 	}
 
 	@PutMapping("/encounter")
-	public ResponseStructure<Encounter> updateEncounter(@RequestBody Encounter encounter) {
+	public ResponseEntity<ResponseStructure<Encounter>> updateEncounter(@RequestBody Encounter encounter) {
 		
 		return service.updateEncounter(encounter);
 	}
 
 	@DeleteMapping("/encounter/{id}")
-	public ResponseStructure<String> deleteEncounter(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteEncounter(@PathVariable int id) {
 		return service.deleteEnconter(id);
 	}
 
 	@GetMapping("/encounter/{id}")
-	public ResponseStructure<Encounter> getEncounter(@PathVariable int id) {
-		return service.findEncounter(id);
+	public ResponseEntity<ResponseStructure<Encounter>> getEncounter(@PathVariable int id) {
+		return service.getEncounter(id);
 	}
 
 	@GetMapping("/encounter/all")
-	public ResponseStructure<List<Encounter>> getAll()
+	public ResponseEntity<ResponseStructure<List<Encounter>>> getAll()
 	{
-		return service.findAll() ;
+		return service.getAll() ;
 	}
 }
