@@ -8,14 +8,15 @@ import org.jsp.HospitalApp.dto.Item;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
-public class ItemService 
-{
+@Service
+public class ItemService {
 	@Autowired
 	ItemDao dao;
 
 	public ResponseStructure<Item> saveItem(Item item) {
-		ResponseStructure<Item> structure=new ResponseStructure<Item>();
+		ResponseStructure<Item> structure = new ResponseStructure<Item>();
 		structure.setBody(dao.saveItem(item));
 		structure.setMessage("Item saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
@@ -23,41 +24,38 @@ public class ItemService
 	}
 
 	public ResponseStructure<Item> updateItem(Item item) {
-		ResponseStructure<Item> structure=new ResponseStructure<Item>();
+		ResponseStructure<Item> structure = new ResponseStructure<Item>();
 		structure.setBody(dao.updateItem(item));
 		structure.setMessage("Encounter Updated successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return structure;
 	}
 
-	
 	public ResponseStructure<String> deleteItem(int id) {
-		Optional<Item> recItem=dao.findById(id);
-		ResponseStructure<String> structure=new ResponseStructure<String>();
-		if(recItem.isPresent()) {
+		Optional<Item> recItem = dao.findById(id);
+		ResponseStructure<String> structure = new ResponseStructure<String>();
+		if (recItem.isPresent()) {
 			dao.deleteById(id);
 			structure.setBody("Item found");
 			structure.setMessage("Item found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
-		}
-		else {
+		} else {
 			structure.setBody("Item Not found");
 			structure.setMessage("Unable to delete the Item");
 			structure.setCode(HttpStatus.NOT_FOUND.value());
 		}
-		
+
 		return structure;
 	}
 
 	public ResponseStructure<Item> findItem(int id) {
-		Optional<Item> recItem=dao.findById(id);
-		ResponseStructure<Item> structure=new ResponseStructure<Item>();
-		if(recItem.isPresent()) {
+		Optional<Item> recItem = dao.findById(id);
+		ResponseStructure<Item> structure = new ResponseStructure<Item>();
+		if (recItem.isPresent()) {
 			structure.setBody(recItem.get());
 			structure.setMessage("Item found ");
 			structure.setCode(HttpStatus.FOUND.value());
-		}
-		else {
+		} else {
 			structure.setBody(null);
 			structure.setMessage("Item Not Found");
 			structure.setCode(HttpStatus.NOT_FOUND.value());
@@ -66,7 +64,7 @@ public class ItemService
 	}
 
 	public ResponseStructure<List<Item>> findAll() {
-		ResponseStructure<List<Item>> structure=new ResponseStructure<List<Item>>();
+		ResponseStructure<List<Item>> structure = new ResponseStructure<List<Item>>();
 		structure.setBody(dao.findAll());
 		structure.setMessage("List of Item ");
 		structure.setCode(HttpStatus.FOUND.value());
