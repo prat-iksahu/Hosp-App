@@ -36,12 +36,12 @@ public class MedOrderController {
 	}
 
 	@GetMapping("/medOrder/{id}")
-	public ResponseStructure<MedOrder> findMedOrderById(@PathVariable int id) {
+	public ResponseStructure<MedOrder> getMedOrder(@PathVariable int id) {
 		return service.findMedOrderById(id);
 	}
 
 	@GetMapping("/medOrder/all")
-	public ResponseStructure<List<MedOrder>> findAllMedOrder() {
+	public ResponseStructure<List<MedOrder>> getAll() {
 		return service.findAllMedOrder() ;
 	}
 
