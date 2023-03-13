@@ -12,7 +12,7 @@ public class HospitalAppExceptionHandler {
 	public ResponseEntity<ResponseStructure<String>> handleIdNotFound(IdNotFoundException e) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		structure.setBody(e.getMessage());
-		structure.setMessage("user not found");
+		structure.setMessage("Record not found");
 		structure.setCode(HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 	}
