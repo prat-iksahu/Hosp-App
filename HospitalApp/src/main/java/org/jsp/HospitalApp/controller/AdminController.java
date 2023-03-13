@@ -2,9 +2,7 @@ package org.jsp.HospitalApp.controller;
 
 import java.util.List;
 
-import org.jsp.HospitalApp.dto.Address;
 import org.jsp.HospitalApp.dto.Admin;
-import org.jsp.HospitalApp.dto.Branch;
 import org.jsp.HospitalApp.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

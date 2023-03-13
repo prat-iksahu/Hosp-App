@@ -7,6 +7,7 @@ import org.jsp.HospitalApp.dto.MedOrder;
 import org.jsp.HospitalApp.repository.MedOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 @Repository
 public class MedOrderDao {
 	@Autowired
@@ -21,12 +22,12 @@ public class MedOrderDao {
 	}
 
 	public Optional<MedOrder> findById(int id) {
-		return repository.findById(id);	
+		return repository.findById(id);
 	}
 
 	public void deleteById(int id) {
-		repository.deleteById(id);	
-		
+		repository.deleteById(id);
+
 	}
 
 	public List<MedOrder> findAll() {

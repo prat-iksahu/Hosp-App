@@ -1,4 +1,5 @@
 package org.jsp.HospitalApp.repository;
+
 import org.jsp.HospitalApp.dto.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 

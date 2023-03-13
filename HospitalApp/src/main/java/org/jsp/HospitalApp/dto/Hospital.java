@@ -8,17 +8,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+
 @Entity
 @Data
 public class Hospital {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name,founder;
+	private String name, founder;
 	private int yoe;
 	private String gstno;
 	@OneToMany
 	private List<Branch> branches;
-
 
 }
