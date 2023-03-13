@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.jsp.HospitalApp.dao.ItemDao;
 import org.jsp.HospitalApp.dto.Item;
 import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class ItemService
 	public ResponseEntity<ResponseStructure<Item>> updateItem(Item item) {
 		ResponseStructure<Item> structure=new ResponseStructure<Item>();
 		structure.setBody(dao.updateItem(item));
-		structure.setMessage("Encounter Updated successfully");
+		structure.setMessage("Item Updated successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.ACCEPTED);
 	}
@@ -44,9 +45,7 @@ public class ItemService
 			structure.setCode(HttpStatus.FOUND.value());
 		}
 		else {
-			structure.setBody("Item Not found");
-			structure.setMessage("Unable to delete the Item");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
+			throw new IdNotFoundException();
 		}
 		
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
@@ -61,9 +60,7 @@ public class ItemService
 			structure.setCode(HttpStatus.FOUND.value());
 		}
 		else {
-			structure.setBody(null);
-			structure.setMessage("Item Not Found");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
+			throw new IdNotFoundException();
 		}
 		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.FOUND);
 	}

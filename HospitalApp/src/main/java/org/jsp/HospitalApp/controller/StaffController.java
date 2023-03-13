@@ -2,8 +2,9 @@ package org.jsp.HospitalApp.controller;
 
 import java.util.List;
 
+import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.dto.Staff;
-import org.jsp.HospitalApp.repository.StaffRepository;
+import org.jsp.HospitalApp.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,30 +17,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StaffController {
 	@Autowired
-	private StaffRepository staffRepository;
+	StaffService service;
 
 	@PostMapping("/staff")
-	public Staff saveStaff(@RequestBody Staff staff) {
-		return staffRepository.save(staff);
+	public ResponseStructure<Staff> saveStaff(@RequestBody Staff staff) {
+		return service.saveStaff(staff);
 	}
 
 	@PutMapping("/staff")
-	public Staff updateStaff(@RequestBody Staff staff) {
-		return staffRepository.save(staff);
+	public ResponseStructure<Staff> updateStaff(@RequestBody Staff staff) {
+		return service.updateStaff(staff);
 	}
 
 	@DeleteMapping("/staff/{id}")
-	public void deleteStaff(@PathVariable int id) {
-		staffRepository.deleteById(id);
+	public ResponseStructure<String> deleteStaff(@PathVariable int id) {
+
+		return service.deleteStaff(id);
 	}
 
 	@GetMapping("/staff/{id}")
-	public Staff getStaff(@PathVariable int id) {
-		return staffRepository.findById(id).get();
+	public ResponseStructure<Staff> findStaffById(@PathVariable int id) {
+		return service.findStaffById(id);
 	}
 
 	@GetMapping("/staff/all")
-	public List<Staff> getAll() {
-		return staffRepository.findAll();
+	public ResponseStructure<List<Staff>> findAllStaff() {
+		return service.findAllStaff();
 	}
 }

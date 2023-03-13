@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.jsp.HospitalApp.dao.EncounterDao;
 import org.jsp.HospitalApp.dto.Encounter;
 import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +46,7 @@ public class EncounterService
 			structure.setCode(HttpStatus.FOUND.value());
 		}
 		else {
-			structure.setBody("Encounter Not found");
-			structure.setMessage("Unable to delete the Encounter");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
+			throw new IdNotFoundException();
 		}
 		
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
@@ -62,9 +61,7 @@ public class EncounterService
 			structure.setCode(HttpStatus.FOUND.value());
 		}
 		else {
-			structure.setBody(null);
-			structure.setMessage("Encounter Not Found");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
+			throw new IdNotFoundException();
 		}
 		return new ResponseEntity<ResponseStructure<Encounter>>(structure, HttpStatus.FOUND);
 	}
