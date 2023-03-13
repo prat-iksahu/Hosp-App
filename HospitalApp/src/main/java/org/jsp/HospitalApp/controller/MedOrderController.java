@@ -41,13 +41,9 @@ public class MedOrderController {
 	}
 
 	@GetMapping("/medOrder/all")
-<<<<<<< HEAD
 	public ResponseStructure<List<MedOrder>> getAll() {
 		return service.findAllMedOrder() ;
-=======
-	public ResponseStructure<List<MedOrder>> findAllMedOrder() {
-		return service.findAllMedOrder();
->>>>>>> 38e9d8de89eac2640842242cb8deb5d806393cf4
+
 	}
 
 }

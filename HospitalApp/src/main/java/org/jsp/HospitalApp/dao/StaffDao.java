@@ -7,10 +7,7 @@ import org.jsp.HospitalApp.dto.Staff;
 import org.jsp.HospitalApp.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-<<<<<<< HEAD
-=======
 
->>>>>>> 38e9d8de89eac2640842242cb8deb5d806393cf4
 @Repository
 public class StaffDao {
 	@Autowired
