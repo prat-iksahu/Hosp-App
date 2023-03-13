@@ -3,7 +3,8 @@ package org.jsp.HospitalApp.controller;
 import java.util.List;
 
 import org.jsp.HospitalApp.dto.Admin;
-import org.jsp.HospitalApp.repository.AdminRepository;
+import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,32 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AdminController {
 	@Autowired
-	private AdminRepository adminRepository;
+	private AdminService service;
 
 	@PostMapping("/admin")
-	public Admin saveAdmin(@RequestBody Admin admin) {
-		System.out.print(admin.getName());
-		return adminRepository.save(admin);
+	public ResponseStructure<Admin> saveAdmin(@RequestBody Admin admin) {
+		return service.saveAdmin(admin);
 	}
 
 	@PutMapping("/admin")
-	public Admin updateAdmin(@RequestBody Admin admin) {
-		return adminRepository.save(admin);
+	public ResponseStructure<Admin> updateAdmin(@RequestBody Admin admin) {
+		return service.updateAdmin(admin);
 	}
 
 	@DeleteMapping("/admin/{id}")
-	public void deleteAdmin(@PathVariable int id) {
-		adminRepository.deleteById(id);
+	public ResponseStructure<String> deleteAdmin(@PathVariable int id) {
+		return service.deleteAdmin(id);
 	}
 
 	@GetMapping("/admin/{id}")
-	public Admin getAdmin(@PathVariable int id) {
-		return adminRepository.findById(id).get();
+	public ResponseStructure<Admin> findAdminById(@PathVariable int id) {
+		return service.findAdminById(id);
 	}
 
 	@GetMapping("/admin/all")
-	public List<Admin> getAll() {
-		return adminRepository.findAll();
+	public ResponseStructure<List<Admin>> findAllAdmin() {
+		return service.findAllAdmin();
 	}
-
 }
