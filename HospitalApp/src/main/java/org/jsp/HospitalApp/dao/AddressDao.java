@@ -1,10 +1,10 @@
 package org.jsp.HospitalApp.dao;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import org.jsp.HospitalApp.dto.Address;
-import org.jsp.HospitalApp.dto.Admin;
 import org.jsp.HospitalApp.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,3 +40,6 @@ public class AddressDao {
 	}
 
 }
+
+
+
