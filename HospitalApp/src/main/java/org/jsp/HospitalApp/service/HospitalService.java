@@ -19,7 +19,6 @@ public class HospitalService {
 
 	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(Hospital hospital) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
-
 		structure.setBody(hospitalDao.saveHospital(hospital));
 		structure.setMessage("Saved Successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());

@@ -5,6 +5,7 @@ import org.jsp.HospitalApp.dto.Person;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,27 +20,27 @@ public class PersonController {
 	PersonService service;
 
 	@PostMapping("/person")
-	public ResponseStructure<Person> savePerson(@RequestBody Person person) {
+	public ResponseEntity<ResponseStructure<Person>> savePerson(@RequestBody Person person) {
 		return service.savePerson(person);
 	}
 
 	@PutMapping("/person")
-	public ResponseStructure<Person> updatePerson(@RequestBody Person person) {
+	public ResponseEntity<ResponseStructure<Person>> updatePerson(@RequestBody Person person) {
 		return service.updatePerson(person);
 	}
 
 	@DeleteMapping("/person/{id}")
-	public ResponseStructure<String> deletePerson(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<String>> deletePerson(@PathVariable int id) {
 		return service.deletePerson(id);
 	}
 
 	@GetMapping("/person/{id}")
-	public ResponseStructure<Person> findPersonById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Person>> findPersonById(@PathVariable int id) {
 		return service.findPersonById(id);
 	}
 
 	@GetMapping("/person/all")
-	public ResponseStructure<List<Person>> findAllPerson() {
+	public ResponseEntity<ResponseStructure<List<Person>>> findAllPerson() {
 		return service.findAllPerson();
 	}
 }
