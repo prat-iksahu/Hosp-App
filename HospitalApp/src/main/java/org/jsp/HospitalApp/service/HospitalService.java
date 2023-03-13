@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.jsp.HospitalApp.dao.HospitalDao;
 import org.jsp.HospitalApp.dto.Hospital;
 import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,27 +17,27 @@ public class HospitalService {
 	@Autowired
 	private HospitalDao hospitalDao;
 
-	public ResponseStructure<Hospital> saveHospital(Hospital hospital) {
+	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(Hospital hospital) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 
 		structure.setBody(hospitalDao.saveHospital(hospital));
 		structure.setMessage("Saved Successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<Hospital> updateHospital(Hospital hospital) {
+	public ResponseEntity<ResponseStructure<Hospital>> updateHospital(Hospital hospital) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 
 		structure.setBody(hospitalDao.updateHospital(hospital));
 		structure.setMessage("Saved Successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<String> deleteHospital(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteHospital(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 
 		Optional<Hospital> op = hospitalDao.getHospitalById(id);
@@ -45,16 +47,13 @@ public class HospitalService {
 			structure.setBody("User Present");
 			structure.setMessage("Deleted Successfully");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else {
-			structure.setBody("User Not Present");
-			structure.setMessage("Cannot Delete");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
-		}
+		} else
+			throw new IdNotFoundException();
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<Hospital> getHospital(int id) {
+	public ResponseEntity<ResponseStructure<Hospital>> getHospital(int id) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 
 		Optional<Hospital> op = hospitalDao.getHospitalById(id);
@@ -62,20 +61,17 @@ public class HospitalService {
 			structure.setBody(op.get());
 			structure.setMessage("Id is present");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else {
-			structure.setBody(null);
-			structure.setMessage("Id not Present");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
-		}
+		} else
+			throw new IdNotFoundException();
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<Hospital>> (structure,HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<List<Hospital>> getAll() {
+	public ResponseEntity<ResponseStructure<List<Hospital>>> getAll() {
 		ResponseStructure<List<Hospital>> structure = new ResponseStructure<List<Hospital>>();
 		structure.setBody(hospitalDao.getAll());
 		structure.setMessage("Records are fetched");
 		structure.setCode(HttpStatus.FOUND.value());
-		return structure;
+		return new ResponseEntity<ResponseStructure<List<Hospital>>> (structure,HttpStatus.FOUND);
 	}
 }

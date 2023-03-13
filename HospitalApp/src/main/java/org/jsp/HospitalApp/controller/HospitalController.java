@@ -6,6 +6,7 @@ import org.jsp.HospitalApp.dto.Hospital;
 import org.jsp.HospitalApp.service.HospitalService;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,27 +22,27 @@ public class HospitalController {
 	private HospitalService hospitalService;
 
 	@PostMapping("/hospital")
-	public ResponseStructure<Hospital> saveHospital(@RequestBody Hospital hospital) {
+	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital) {
 		return hospitalService.saveHospital(hospital);
 	}
 
 	@PutMapping("/hospital")
-	public ResponseStructure<Hospital> updateHospital(@RequestBody Hospital hospital) {
+	public ResponseEntity<ResponseStructure<Hospital>> updateHospital(@RequestBody Hospital hospital) {
 		return hospitalService.updateHospital(hospital);
 	}
 
 	@DeleteMapping("/hospital/{id}")
-	public ResponseStructure<String> deleteHospital(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteHospital(@PathVariable int id) {
 		return hospitalService.deleteHospital(id);
 	}
 
 	@GetMapping("/hospital/{id}")
-	public ResponseStructure<Hospital> getHospital(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Hospital>> getHospital(@PathVariable int id) {
 		return hospitalService.getHospital(id);
 	}
 
 	@GetMapping("/hospital/all")
-	public ResponseStructure<List<Hospital>> getAll() {
+	public ResponseEntity<ResponseStructure<List<Hospital>>> getAll() {
 		return hospitalService.getAll();
 	}
 }
