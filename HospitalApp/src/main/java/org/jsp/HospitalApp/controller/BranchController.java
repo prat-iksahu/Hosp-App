@@ -1,9 +1,10 @@
 package org.jsp.HospitalApp.controller;
+
 import java.util.List;
-import java.util.Optional;
 
 import org.jsp.HospitalApp.dto.Branch;
-import org.jsp.HospitalApp.repository.BranchRepository;
+import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,36 +13,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 public class BranchController {
 	@Autowired
-	private BranchRepository branchRepository;
+	private BranchService branchService;
 
 	@PostMapping("/branch")
-	public Branch saveBranch(@RequestBody Branch branch) {
-		
-		return branchRepository.save(branch);
+	public ResponseStructure<Branch> saveBranch(@RequestBody Branch branch) {
+		return branchService.saveBranch(branch);
 	}
 
 	@PutMapping("/branch")
-	public Branch updateBranch(@RequestBody Branch branch) {
-		return branchRepository.save(branch);
+	public ResponseStructure<Branch> updateBranch(@RequestBody Branch branch) {
+		return branchService.updateBranch(branch);
 	}
 
 	@DeleteMapping("/branch/{id}")
-	public void deleteBranch(@PathVariable int id) {
-		branchRepository.deleteById(id);
+	public ResponseStructure<String> deleteBranch(@PathVariable int id) {
+		return branchService.deleteBranch(id);
 	}
 
 	@GetMapping("/branch/{id}")
-	public Branch getBranch(@PathVariable int id) {
-		Optional<Branch> optional=branchRepository.findById(id);
-		return optional.get();
+	public ResponseStructure<Branch> getBranch(@PathVariable int id) {
+		return branchService.getBranch(id);
 	}
 
 	@GetMapping("/branch/all")
-	public List<Branch> getAll() {
-		return branchRepository.findAll();
+	public ResponseStructure<List<Branch>> getAll() {
+		return branchService.getAll();
 	}
 
 }

@@ -6,16 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+
 @Data
 @Entity
 public class Staff {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name,designation,email,password;
+	private String name, designation, email, password;
 	private long phone;
 	@ManyToOne
 	private Branch branch;
-	
 
 }

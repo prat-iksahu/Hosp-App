@@ -3,11 +3,13 @@ package org.jsp.HospitalApp.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.jsp.HospitalApp.dto.Address;
 import org.jsp.HospitalApp.dto.Admin;
+<<<<<<< HEAD
 import org.jsp.HospitalApp.dto.Branch;
 import org.jsp.HospitalApp.dto.Person;
 import org.jsp.HospitalApp.dto.ResponseStructure;
+=======
+>>>>>>> 7647d8853f8cde9cb8c9b4286df79bdf553dda69
 import org.jsp.HospitalApp.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,5 @@
 package org.jsp.HospitalApp.controller;
+
 import java.util.List;
 import org.jsp.HospitalApp.dto.Person;
 import org.jsp.HospitalApp.dto.ResponseStructure;
@@ -16,26 +17,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
 	@Autowired
 	PersonService service;
+
 	@PostMapping("/person")
 	public ResponseStructure<Person> savePerson(@RequestBody Person person) {
 		return service.savePerson(person);
 	}
+
 	@PutMapping("/person")
 	public ResponseStructure<Person> updatePerson(@RequestBody Person person) {
 		return service.updatePerson(person);
 	}
+
 	@DeleteMapping("/person/{id}")
 	public ResponseStructure<String> deletePerson(@PathVariable int id) {
-		
 		return service.deletePerson(id);
 	}
+
 	@GetMapping("/person/{id}")
 	public ResponseStructure<Person> findPersonById(@PathVariable int id) {
 		return service.findPersonById(id);
 	}
-	
+
 	@GetMapping("/person/all")
 	public ResponseStructure<List<Person>> findAllPerson() {
-		return service.findAllPerson() ;
+		return service.findAllPerson();
 	}
 }

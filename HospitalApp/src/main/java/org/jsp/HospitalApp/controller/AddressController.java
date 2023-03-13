@@ -23,6 +23,7 @@ public class AddressController {
 	private AddressRepository addressRepository;
 
 	@PostMapping("/address")
+<<<<<<< HEAD
 
 	public ResponseStructure<Address> saveAddress(@RequestBody Address address) {
 		ResponseStructure<Address> structure = new ResponseStructure<Address>();
@@ -30,6 +31,11 @@ public class AddressController {
 		structure.setMessage("Address saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return structure;
+=======
+	public Address saveAddress(@RequestBody Address address) {
+
+		return addressRepository.save(address);
+>>>>>>> 7647d8853f8cde9cb8c9b4286df79bdf553dda69
 	}
 
 	@PutMapping("/address")
