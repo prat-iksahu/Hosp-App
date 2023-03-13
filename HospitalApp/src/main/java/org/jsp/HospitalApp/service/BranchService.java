@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.jsp.HospitalApp.dao.BranchDao;
 import org.jsp.HospitalApp.dto.Branch;
 import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,27 +17,27 @@ public class BranchService {
 	@Autowired
 	private BranchDao branchDao;
 
-	public ResponseStructure<Branch> saveBranch(Branch branch) {
+	public ResponseEntity<ResponseStructure<Branch>> saveBranch(Branch branch) {
 		ResponseStructure<Branch> structure = new ResponseStructure<Branch>();
 
 		structure.setBody(branchDao.saveBranch(branch));
 		structure.setMessage("Saved Successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<Branch>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<Branch> updateBranch(Branch branch) {
+	public ResponseEntity<ResponseStructure<Branch>> updateBranch(Branch branch) {
 		ResponseStructure<Branch> structure = new ResponseStructure<Branch>();
 
 		structure.setBody(branchDao.updateBranch(branch));
 		structure.setMessage("Saved Successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<Branch>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<String> deleteBranch(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteBranch(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 
 		Optional<Branch> op = branchDao.getBranchById(id);
@@ -45,16 +47,13 @@ public class BranchService {
 			structure.setBody("User Present");
 			structure.setMessage("Deleted Successfully");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else {
-			structure.setBody("User Not Present");
-			structure.setMessage("Cannot Delete");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
-		}
+		} else
+			throw new IdNotFoundException();
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<Branch> getBranch(int id) {
+	public ResponseEntity<ResponseStructure<Branch>> getBranch(int id) {
 		ResponseStructure<Branch> structure = new ResponseStructure<Branch>();
 
 		Optional<Branch> op = branchDao.getBranchById(id);
@@ -62,20 +61,17 @@ public class BranchService {
 			structure.setBody(op.get());
 			structure.setMessage("Id is present");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else {
-			structure.setBody(null);
-			structure.setMessage("Id not Present");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
-		}
+		} else
+			throw new IdNotFoundException();
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<Branch>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<List<Branch>> getAll() {
+	public ResponseEntity<ResponseStructure<List<Branch>>> getAll() {
 		ResponseStructure<List<Branch>> structure = new ResponseStructure<List<Branch>>();
 		structure.setBody(branchDao.getAll());
 		structure.setMessage("Records are fetched");
 		structure.setCode(HttpStatus.FOUND.value());
-		return structure;
+		return new ResponseEntity<ResponseStructure<List<Branch>>>(structure, HttpStatus.FOUND);
 	}
 }

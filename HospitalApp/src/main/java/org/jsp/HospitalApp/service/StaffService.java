@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.jsp.HospitalApp.dao.StaffDao;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.dto.Staff;
+import org.jsp.HospitalApp.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,24 +17,25 @@ public class StaffService {
 	@Autowired
 	StaffDao dao;
 
-	public ResponseStructure<Staff> saveStaff(Staff staff) {
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff) {
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		structure.setBody(dao.saveStaff(staff));
 		structure.setMessage("Staff saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
-		return structure;
+
+		return new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<Staff> updateStaff(Staff staff) {
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(Staff staff) {
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		structure.setBody(dao.updateStaff(staff));
 		structure.setMessage("Staff update successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
-		;
-		return structure;
+
+		return new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public ResponseStructure<String> deleteStaff(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(int id) {
 		Optional<Staff> recStaff = dao.findById(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (recStaff.isPresent()) {
@@ -40,36 +43,31 @@ public class StaffService {
 			structure.setBody("Staff found");
 			structure.setMessage("Staff found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else {
-			structure.setBody("Staff Not found");
-			structure.setMessage("Unable to delete the Staff");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
-		}
+		} else
+			throw new IdNotFoundException();
 
-		return structure;
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<Staff> findStaffById(int id) {
+	public ResponseEntity<ResponseStructure<Staff>> findStaffById(int id) {
 		Optional<Staff> recStaff = dao.findById(id);
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		if (recStaff.isPresent()) {
 			structure.setBody(recStaff.get());
 			structure.setMessage("Staff found ");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else {
-			structure.setBody(null);
-			structure.setMessage("Staff Not Found");
-			structure.setCode(HttpStatus.NOT_FOUND.value());
-		}
-		return structure;
+		} else
+			throw new IdNotFoundException();
+
+		return new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseStructure<List<Staff>> findAllStaff() {
+	public ResponseEntity<ResponseStructure<List<Staff>>> findAllStaff() {
 		ResponseStructure<List<Staff>> structure = new ResponseStructure<List<Staff>>();
 		structure.setBody(dao.findAll());
 		structure.setMessage("List of Staff ");
 		structure.setCode(HttpStatus.FOUND.value());
-		return structure;
+		return new ResponseEntity<ResponseStructure<List<Staff>>>(structure, HttpStatus.FOUND);
 	}
 
 }
