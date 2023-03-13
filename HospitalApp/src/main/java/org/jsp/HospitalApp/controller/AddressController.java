@@ -3,7 +3,9 @@ package org.jsp.HospitalApp.controller;
 import java.util.List;
 
 import org.jsp.HospitalApp.dto.Address;
-import org.jsp.HospitalApp.repository.AddressRepository;
+import org.jsp.HospitalApp.dto.Admin;
+import org.jsp.HospitalApp.dto.ResponseStructure;
+import org.jsp.HospitalApp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,32 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AddressController {
 	@Autowired
-	private AddressRepository addressRepository;
+	private AddressService service;
 
 	@PostMapping("/address")
-	public Address saveAddress(@RequestBody Address address) {
-
-		return addressRepository.save(address);
+	public ResponseStructure<Address> saveAddress(@RequestBody Address address) {
+		return service.saveAddress(address);
 	}
 
 	@PutMapping("/address")
-	public Address updateAddress(@RequestBody Address address) {
-		return addressRepository.save(address);
+	public ResponseStructure<Address> updateAddress(@RequestBody Address address) {
+		return service.updateAddress(address);
 	}
 
 	@DeleteMapping("/address/{id}")
-	public void deleteAddress(@PathVariable int id) {
-		addressRepository.deleteById(id);
+	public ResponseStructure<String> deleteAddress(@PathVariable int id) {
+		return service.deleteAddress(id);
 	}
 
 	@GetMapping("/address/{id}")
-	public Address getAddress(@PathVariable int id) {
-		return addressRepository.findById(id).get();
+	public ResponseStructure<Address> findAddressById(@PathVariable int id) {
+		return service.findAddressById(id);
 	}
 
 	@GetMapping("/address/all")
-	public List<Address> getAll() {
-		return addressRepository.findAll();
+	public ResponseStructure<List<Address>>findAllAddress () {
+		return service.findAllAddress();
 	}
-
 }
+
