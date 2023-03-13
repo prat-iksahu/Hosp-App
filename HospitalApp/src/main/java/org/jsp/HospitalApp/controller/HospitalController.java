@@ -18,30 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class HospitalController {
 
 	@Autowired
-	private HospitalService hospitalService;
+	private HospitalService Service;
 
 	@PostMapping("/hospital")
 	public ResponseStructure<Hospital> saveHospital(@RequestBody Hospital hospital) {
-		return hospitalService.saveHospital(hospital);
+		return Service.saveHospital(hospital);
 	}
 
 	@PutMapping("/hospital")
 	public ResponseStructure<Hospital> updateHospital(@RequestBody Hospital hospital) {
-		return hospitalService.updateHospital(hospital);
+		return Service.updateHospital(hospital);
 	}
 
 	@DeleteMapping("/hospital/{id}")
 	public ResponseStructure<String> deleteHospital(@PathVariable int id) {
-		return hospitalService.deleteHospital(id);
+		return Service.deleteHospital(id);
 	}
 
 	@GetMapping("/hospital/{id}")
 	public ResponseStructure<Hospital> getHospital(@PathVariable int id) {
-		return hospitalService.getHospital(id);
+		return Service.getHospital(id);
 	}
 
 	@GetMapping("/hospital/all")
 	public ResponseStructure<List<Hospital>> getAll() {
-		return hospitalService.getAll();
+		return Service.getAll();
 	}
 }
