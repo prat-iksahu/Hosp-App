@@ -1,6 +1,5 @@
 package org.jsp.HospitalApp.dao;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +24,6 @@ public class AddressDao {
 	}
 
 	public void deleteById(int id) {
-
 		repository.deleteById(id);
 	}
 
@@ -40,6 +38,3 @@ public class AddressDao {
 	}
 
 }
-
-
-
