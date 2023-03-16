@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ItemDao 
-{
+public class ItemDao {
 	@Autowired
 	ItemRepository repository;
 
@@ -23,15 +22,15 @@ public class ItemDao
 	}
 
 	public void deleteById(int id) {
-		repository.deleteById(id);	
-		
-	}
-	
-	public Optional<Item> findById(int id) {
-		return repository.findById(id);	
+		repository.deleteById(id);
+
 	}
 
-	public List<Item> findAll() {
+	public Optional<Item> getItem(int id) {
+		return repository.findById(id);
+	}
+
+	public List<Item> getAll() {
 		return repository.findAll();
 	}
 

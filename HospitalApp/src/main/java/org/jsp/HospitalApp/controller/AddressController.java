@@ -36,13 +36,13 @@ public class AddressController {
 	}
 
 	@GetMapping("/address/{id}")
-	public ResponseEntity<ResponseStructure<Address>> findAddressById(@PathVariable int id) {
-		return service.findAddressById(id);
+	public ResponseEntity<ResponseStructure<Address>> getAddress(@PathVariable int id) {
+		return service.getAddress(id);
 	}
 
 	@GetMapping("/address/all")
 
-	public ResponseEntity<ResponseStructure<List<Address>>> findAllAddress() {
-		return service.findAllAddress();
+	public ResponseEntity<ResponseStructure<List<Address>>> getAll() {
+		return service.getAll();
 	}
 }

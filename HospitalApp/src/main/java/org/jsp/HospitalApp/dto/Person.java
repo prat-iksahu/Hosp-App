@@ -19,6 +19,6 @@ public class Person {
 	private long phone;
 	private int age;
 	@OneToMany
-	private List<Encounter> counters;
+	private List<Encounter> encounters;
 
 }

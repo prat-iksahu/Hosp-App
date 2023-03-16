@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.jsp.HospitalApp.dao.MedOrderDao;
-import org.jsp.HospitalApp.dto.Hospital;
 import org.jsp.HospitalApp.dto.MedOrder;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.exception.IdNotFoundException;
@@ -35,10 +34,10 @@ public class MedOrderService {
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteMedOrder(int id) {
-		Optional<MedOrder> recMedOrder = dao.findById(id);
+		Optional<MedOrder> recMedOrder = dao.getMedOrder(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (recMedOrder.isPresent()) {
-			dao.deleteById(id);
+			dao.deleteMedOrder(id);
 			structure.setBody("MedOrder found");
 			structure.setMessage("MedOrder found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -48,8 +47,8 @@ public class MedOrderService {
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<MedOrder>> findMedOrderById(int id) {
-		Optional<MedOrder> recMedOrder = dao.findById(id);
+	public ResponseEntity<ResponseStructure<MedOrder>> getMedOrder(int id) {
+		Optional<MedOrder> recMedOrder = dao.getMedOrder(id);
 		ResponseStructure<MedOrder> structure = new ResponseStructure<MedOrder>();
 		if (recMedOrder.isPresent()) {
 			structure.setBody(recMedOrder.get());
@@ -58,15 +57,15 @@ public class MedOrderService {
 		} else
 			throw new IdNotFoundException();
 
-		return new ResponseEntity<ResponseStructure<MedOrder>> (structure,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<List<MedOrder>>> findAllMedOrder() {
+	public ResponseEntity<ResponseStructure<List<MedOrder>>> getAll() {
 		ResponseStructure<List<MedOrder>> structure = new ResponseStructure<List<MedOrder>>();
-		structure.setBody(dao.findAll());
+		structure.setBody(dao.getAll());
 		structure.setMessage("List of MedOrder ");
 		structure.setCode(HttpStatus.FOUND.value());
-		return new ResponseEntity<ResponseStructure<List<MedOrder>>> (structure,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<List<MedOrder>>>(structure, HttpStatus.FOUND);
 	}
 
 }

@@ -23,16 +23,16 @@ public class AddressDao {
 
 	}
 
-	public void deleteById(int id) {
+	public void deleteAddress(int id) {
 		repository.deleteById(id);
 	}
 
-	public Optional<Address> findById(int id) {
+	public Optional<Address> getAddress(int id) {
 		return repository.findById(id);
 
 	}
 
-	public List<Address> findAll() {
+	public List<Address> getAll() {
 		return repository.findAll();
 
 	}

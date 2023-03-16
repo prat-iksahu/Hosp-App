@@ -20,6 +20,6 @@ public class MedOrder {
 	@OneToMany
 	private List<Item> items;
 	@ManyToOne
-	private Encounter counter;
+	private Encounter encounter;
 
 }

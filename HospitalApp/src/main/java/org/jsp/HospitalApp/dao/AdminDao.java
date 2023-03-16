@@ -23,17 +23,17 @@ public class AdminDao {
 
 	}
 
-	public void deleteById(int id) {
+	public void deleteAdmin(int id) {
 
 		repository.deleteById(id);
 	}
 
-	public Optional<Admin> findById(int id) {
+	public Optional<Admin> getAdmin(int id) {
 		return repository.findById(id);
 
 	}
 
-	public List<Admin> findAll() {
+	public List<Admin> getAll() {
 		return repository.findAll();
 
 	}

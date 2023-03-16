@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.jsp.HospitalApp.dao.PersonDao;
-import org.jsp.HospitalApp.dto.Hospital;
 import org.jsp.HospitalApp.dto.Person;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.exception.IdNotFoundException;
@@ -35,10 +34,10 @@ public class PersonService {
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deletePerson(int id) {
-		Optional<Person> recPerson = dao.findById(id);
+		Optional<Person> recPerson = dao.getPerson(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (recPerson.isPresent()) {
-			dao.deleteById(id);
+			dao.deletePerson(id);
 			structure.setBody("Person found");
 			structure.setMessage("Person found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -48,25 +47,25 @@ public class PersonService {
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<Person>> findPersonById(int id) {
-		Optional<Person> recPerson = dao.findById(id);
+	public ResponseEntity<ResponseStructure<Person>> getPerson(int id) {
+		Optional<Person> recPerson = dao.getPerson(id);
 		ResponseStructure<Person> structure = new ResponseStructure<Person>();
 		if (recPerson.isPresent()) {
 			structure.setBody(recPerson.get());
 			structure.setMessage("Person found ");
 			structure.setCode(HttpStatus.FOUND.value());
-		}else
+		} else
 			throw new IdNotFoundException();
 
-		return new ResponseEntity<ResponseStructure<Person>> (structure,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<Person>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<List<Person>>> findAllPerson() {
+	public ResponseEntity<ResponseStructure<List<Person>>> getAll() {
 		ResponseStructure<List<Person>> structure = new ResponseStructure<List<Person>>();
-		structure.setBody(dao.findAll());
+		structure.setBody(dao.getAll());
 		structure.setMessage("List of Person ");
 		structure.setCode(HttpStatus.FOUND.value());
-		return new ResponseEntity<ResponseStructure<List<Person>>> (structure,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<List<Person>>>(structure, HttpStatus.FOUND);
 	}
 
 }

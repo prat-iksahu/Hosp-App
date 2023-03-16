@@ -25,7 +25,7 @@ public class HospitalDao {
 		hospitalRepository.deleteById(id);
 	}
 
-	public Optional<Hospital> getHospitalById(int id) {
+	public Optional<Hospital> getHospital(int id) {
 		return hospitalRepository.findById(id);
 	}
 

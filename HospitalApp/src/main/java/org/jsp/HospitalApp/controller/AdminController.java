@@ -1,9 +1,7 @@
 package org.jsp.HospitalApp.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.jsp.HospitalApp.dto.Address;
 import org.jsp.HospitalApp.dto.Admin;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 
@@ -34,17 +32,17 @@ public class AdminController {
 	}
 
 	@DeleteMapping("/admin/{id}")
-	public  ResponseEntity<ResponseStructure<String>> deleteAdmin(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteAdmin(@PathVariable int id) {
 		return service.deleteAdmin(id);
 	}
 
 	@GetMapping("/admin/{id}")
-	public ResponseEntity<ResponseStructure<Admin>> findAdminById(@PathVariable int id) {
-		return service.findAdminById(id);
+	public ResponseEntity<ResponseStructure<Admin>> getAdmin(@PathVariable int id) {
+		return service.getAdmin(id);
 	}
 
 	@GetMapping("/admin/all")
-	public ResponseEntity<ResponseStructure<List<Admin>>> findAllAdmin() {
-		return service.findAllAdmin();
+	public ResponseEntity<ResponseStructure<List<Admin>>> getAll() {
+		return service.getAll();
 	}
 }

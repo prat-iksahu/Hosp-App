@@ -36,10 +36,10 @@ public class StaffService {
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteStaff(int id) {
-		Optional<Staff> recStaff = dao.findById(id);
+		Optional<Staff> recStaff = dao.getStaff(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (recStaff.isPresent()) {
-			dao.deleteById(id);
+			dao.deleteStaff(id);
 			structure.setBody("Staff found");
 			structure.setMessage("Staff found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -49,8 +49,8 @@ public class StaffService {
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<Staff>> findStaffById(int id) {
-		Optional<Staff> recStaff = dao.findById(id);
+	public ResponseEntity<ResponseStructure<Staff>> getStaff(int id) {
+		Optional<Staff> recStaff = dao.getStaff(id);
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		if (recStaff.isPresent()) {
 			structure.setBody(recStaff.get());
@@ -62,9 +62,9 @@ public class StaffService {
 		return new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<List<Staff>>> findAllStaff() {
+	public ResponseEntity<ResponseStructure<List<Staff>>> getAll() {
 		ResponseStructure<List<Staff>> structure = new ResponseStructure<List<Staff>>();
-		structure.setBody(dao.findAll());
+		structure.setBody(dao.getAll());
 		structure.setMessage("List of Staff ");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<Staff>>>(structure, HttpStatus.FOUND);

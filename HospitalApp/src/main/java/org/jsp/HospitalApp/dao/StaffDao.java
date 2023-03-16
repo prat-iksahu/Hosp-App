@@ -23,16 +23,16 @@ public class StaffDao {
 
 	}
 
-	public void deleteById(int id) {
+	public void deleteStaff(int id) {
 		repository.deleteById(id);
 	}
 
-	public Optional<Staff> findById(int id) {
+	public Optional<Staff> getStaff(int id) {
 		return repository.findById(id);
 
 	}
 
-	public List<Staff> findAll() {
+	public List<Staff> getAll() {
 		return repository.findAll();
 
 	}

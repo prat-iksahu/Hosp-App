@@ -22,17 +22,17 @@ public class PersonDao {
 
 	}
 
-	public void deleteById(int id) {
+	public void deletePerson(int id) {
 
 		repository.deleteById(id);
 	}
 
-	public Optional<Person> findById(int id) {
+	public Optional<Person> getPerson(int id) {
 		return repository.findById(id);
 
 	}
 
-	public List<Person> findAll() {
+	public List<Person> getAll() {
 		return repository.findAll();
 
 	}
