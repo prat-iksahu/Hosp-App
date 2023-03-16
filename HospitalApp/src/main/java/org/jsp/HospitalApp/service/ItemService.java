@@ -13,13 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItemService 
-{
+public class ItemService {
 	@Autowired
 	ItemDao dao;
 
 	public ResponseEntity<ResponseStructure<Item>> saveItem(Item item) {
-		ResponseStructure<Item> structure=new ResponseStructure<Item>();
+		ResponseStructure<Item> structure = new ResponseStructure<Item>();
 		structure.setBody(dao.saveItem(item));
 		structure.setMessage("Item saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
@@ -27,47 +26,44 @@ public class ItemService
 	}
 
 	public ResponseEntity<ResponseStructure<Item>> updateItem(Item item) {
-		ResponseStructure<Item> structure=new ResponseStructure<Item>();
+		ResponseStructure<Item> structure = new ResponseStructure<Item>();
 		structure.setBody(dao.updateItem(item));
 		structure.setMessage("Item Updated successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	
 	public ResponseEntity<ResponseStructure<String>> deleteItem(int id) {
-		Optional<Item> recItem=dao.findById(id);
-		ResponseStructure<String> structure=new ResponseStructure<String>();
-		if(recItem.isPresent()) {
+		Optional<Item> recItem = dao.getItem(id);
+		ResponseStructure<String> structure = new ResponseStructure<String>();
+		if (recItem.isPresent()) {
 			dao.deleteById(id);
 			structure.setBody("Item found");
 			structure.setMessage("Item found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
-		}
-		else {
+		} else {
 			throw new IdNotFoundException();
 		}
-		
+
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
 	public ResponseEntity<ResponseStructure<Item>> getItem(int id) {
-		Optional<Item> recItem=dao.findById(id);
-		ResponseStructure<Item> structure=new ResponseStructure<Item>();
-		if(recItem.isPresent()) {
+		Optional<Item> recItem = dao.getItem(id);
+		ResponseStructure<Item> structure = new ResponseStructure<Item>();
+		if (recItem.isPresent()) {
 			structure.setBody(recItem.get());
 			structure.setMessage("Item found ");
 			structure.setCode(HttpStatus.FOUND.value());
-		}
-		else {
+		} else {
 			throw new IdNotFoundException();
 		}
 		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.FOUND);
 	}
 
 	public ResponseEntity<ResponseStructure<List<Item>>> getAll() {
-		ResponseStructure<List<Item>> structure=new ResponseStructure<List<Item>>();
-		structure.setBody(dao.findAll());
+		ResponseStructure<List<Item>> structure = new ResponseStructure<List<Item>>();
+		structure.setBody(dao.getAll());
 		structure.setMessage("List of Item ");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<Item>>>(structure, HttpStatus.FOUND);

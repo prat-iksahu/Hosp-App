@@ -24,7 +24,7 @@ public class Branch {
 	@OneToOne
 	private Address address;
 	@OneToMany
-	private List<Encounter> counters;
+	private List<Encounter> encounters;
 	@OneToMany
 	private List<Admin> admin;
 	@OneToMany

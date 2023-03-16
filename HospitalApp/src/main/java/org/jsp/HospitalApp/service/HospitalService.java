@@ -39,7 +39,7 @@ public class HospitalService {
 	public ResponseEntity<ResponseStructure<String>> deleteHospital(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 
-		Optional<Hospital> op = hospitalDao.getHospitalById(id);
+		Optional<Hospital> op = hospitalDao.getHospital(id);
 		if (op.isPresent()) {
 			hospitalDao.deleteHospital(id);
 
@@ -55,7 +55,7 @@ public class HospitalService {
 	public ResponseEntity<ResponseStructure<Hospital>> getHospital(int id) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 
-		Optional<Hospital> op = hospitalDao.getHospitalById(id);
+		Optional<Hospital> op = hospitalDao.getHospital(id);
 		if (op.isPresent()) {
 			structure.setBody(op.get());
 			structure.setMessage("Id is present");
@@ -63,7 +63,7 @@ public class HospitalService {
 		} else
 			throw new IdNotFoundException();
 
-		return new ResponseEntity<ResponseStructure<Hospital>> (structure,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.FOUND);
 	}
 
 	public ResponseEntity<ResponseStructure<List<Hospital>>> getAll() {
@@ -71,6 +71,6 @@ public class HospitalService {
 		structure.setBody(hospitalDao.getAll());
 		structure.setMessage("Records are fetched");
 		structure.setCode(HttpStatus.FOUND.value());
-		return new ResponseEntity<ResponseStructure<List<Hospital>>> (structure,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<List<Hospital>>>(structure, HttpStatus.FOUND);
 	}
 }

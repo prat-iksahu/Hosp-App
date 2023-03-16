@@ -38,12 +38,12 @@ public class MedOrderController {
 
 	@GetMapping("/medOrder/{id}")
 	public ResponseEntity<ResponseStructure<MedOrder>> getMedOrder(@PathVariable int id) {
-		return service.findMedOrderById(id);
+		return service.getMedOrder(id);
 	}
 
 	@GetMapping("/medOrder/all")
 	public ResponseEntity<ResponseStructure<List<MedOrder>>> getAll() {
-		return service.findAllMedOrder() ;
+		return service.getAll();
 
 	}
 

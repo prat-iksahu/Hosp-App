@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EncounterDao 
-{
+public class EncounterDao {
 	@Autowired
 	EncounterRepository repository;
 
@@ -22,17 +21,17 @@ public class EncounterDao
 	public Encounter updateEncounter(Encounter encounter) {
 		return repository.save(encounter);
 	}
-	
-	public void deleteById(int id) {
-		repository.deleteById(id);	
-		
+
+	public void deleteEncounter(int id) {
+		repository.deleteById(id);
+
 	}
 
-	public Optional<Encounter> findById(int id) {
-		return repository.findById(id);	
+	public Optional<Encounter> getEncounter(int id) {
+		return repository.findById(id);
 	}
 
-	public List<Encounter> findAll() {
+	public List<Encounter> getAll() {
 		return repository.findAll();
 	}
 }

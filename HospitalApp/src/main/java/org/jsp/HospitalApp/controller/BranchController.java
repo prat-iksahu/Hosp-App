@@ -20,9 +20,9 @@ public class BranchController {
 	@Autowired
 	private BranchService branchService;
 
-	@PostMapping("/branch")
-	public ResponseEntity<ResponseStructure<Branch>> saveBranch(@RequestBody Branch branch) {
-		return branchService.saveBranch(branch);
+	@PostMapping("/branch/{hid}")
+	public ResponseEntity<ResponseStructure<Branch>> saveBranch(@RequestBody Branch branch, @PathVariable int hid) {
+		return branchService.saveBranch(branch, hid);
 	}
 
 	@PutMapping("/branch")

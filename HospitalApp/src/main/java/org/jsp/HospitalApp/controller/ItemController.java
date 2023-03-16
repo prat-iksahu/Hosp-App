@@ -27,7 +27,7 @@ public class ItemController {
 
 	@PutMapping("/item")
 	public ResponseEntity<ResponseStructure<Item>> updateItem(@RequestBody Item item) {
-		
+
 		return service.updateItem(item);
 	}
 
@@ -42,8 +42,7 @@ public class ItemController {
 	}
 
 	@GetMapping("/item/all")
-	public ResponseEntity<ResponseStructure<List<Item>>> getAll()
-	{
-		return service.getAll() ;
+	public ResponseEntity<ResponseStructure<List<Item>>> getAll() {
+		return service.getAll();
 	}
 }

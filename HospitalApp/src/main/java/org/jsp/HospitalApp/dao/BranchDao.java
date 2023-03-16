@@ -21,12 +21,12 @@ public class BranchDao {
 		return branchRepository.save(branch);
 	}
 
-	public Optional<Branch> getBranchById(int id) {
-		return branchRepository.findById(id);
-	}
-
 	public void deleteBranch(int id) {
 		branchRepository.deleteById(id);
+	}
+
+	public Optional<Branch> getBranch(int id) {
+		return branchRepository.findById(id);
 	}
 
 	public List<Branch> getAll() {

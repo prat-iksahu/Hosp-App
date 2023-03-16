@@ -34,10 +34,10 @@ public class AddressService {
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteAddress(int id) {
-		Optional<Address> op = dao.findById(id);
+		Optional<Address> op = dao.getAddress(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (op.isPresent()) {
-			dao.deleteById(id);
+			dao.deleteAddress(id);
 			structure.setBody("Address Found");
 			structure.setMessage("Address found and deleted succesfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -46,21 +46,21 @@ public class AddressService {
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<Address>> findAddressById(int id) {
-		Optional<Address> op = dao.findById(id);
+	public ResponseEntity<ResponseStructure<Address>> getAddress(int id) {
+		Optional<Address> op = dao.getAddress(id);
 		ResponseStructure<Address> structure = new ResponseStructure<Address>();
 		if (op.isPresent()) {
 			structure.setBody(op.get());
 			structure.setMessage("Address found ");
 			structure.setCode(HttpStatus.FOUND.value());
-		} else 
+		} else
 			throw new IdNotFoundException();
 		return new ResponseEntity<ResponseStructure<Address>>(structure, HttpStatus.FOUND);
 	}
 
-	public ResponseEntity<ResponseStructure<List<Address>>> findAllAddress() {
+	public ResponseEntity<ResponseStructure<List<Address>>> getAll() {
 		ResponseStructure<List<Address>> structure = new ResponseStructure<List<Address>>();
-		structure.setBody(dao.findAll());
+		structure.setBody(dao.getAll());
 		structure.setMessage("List of Address");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<Address>>>(structure, HttpStatus.FOUND);

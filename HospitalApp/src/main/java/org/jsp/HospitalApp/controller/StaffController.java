@@ -37,12 +37,12 @@ public class StaffController {
 	}
 
 	@GetMapping("/staff/{id}")
-	public ResponseEntity<ResponseStructure<Staff>> findStaffById(@PathVariable int id) {
-		return service.findStaffById(id);
+	public ResponseEntity<ResponseStructure<Staff>> getStaff(@PathVariable int id) {
+		return service.getStaff(id);
 	}
 
 	@GetMapping("/staff/all")
-	public ResponseEntity<ResponseStructure<List<Staff>>> findAllStaff() {
-		return service.findAllStaff();
+	public ResponseEntity<ResponseStructure<List<Staff>>> getAll() {
+		return service.getAll();
 	}
 }

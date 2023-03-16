@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.jsp.HospitalApp.dao.BranchDao;
+import org.jsp.HospitalApp.dao.HospitalDao;
 import org.jsp.HospitalApp.dto.Branch;
+import org.jsp.HospitalApp.dto.Hospital;
 import org.jsp.HospitalApp.dto.ResponseStructure;
 import org.jsp.HospitalApp.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,21 @@ import org.springframework.stereotype.Service;
 public class BranchService {
 	@Autowired
 	private BranchDao branchDao;
+	@Autowired
+	HospitalDao hospitalDao;
 
-	public ResponseEntity<ResponseStructure<Branch>> saveBranch(Branch branch) {
+	public ResponseEntity<ResponseStructure<Branch>> saveBranch(Branch branch, int hid) {
+		Optional<Hospital> hospital = hospitalDao.getHospital(hid);
 		ResponseStructure<Branch> structure = new ResponseStructure<Branch>();
-
-		structure.setBody(branchDao.saveBranch(branch));
-		structure.setMessage("Saved Successfully");
-		structure.setCode(HttpStatus.ACCEPTED.value());
+		if (hospital.isPresent()) {
+			branch.setHospital(hospital.get());
+			hospital.get().getBranches().add(branch);
+			structure.setBody(branchDao.saveBranch(branch));
+			structure.setMessage("Saved Successfully");
+			structure.setCode(HttpStatus.ACCEPTED.value());
+		} else {
+			throw new IdNotFoundException();
+		}
 
 		return new ResponseEntity<ResponseStructure<Branch>>(structure, HttpStatus.ACCEPTED);
 	}
@@ -40,7 +50,7 @@ public class BranchService {
 	public ResponseEntity<ResponseStructure<String>> deleteBranch(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 
-		Optional<Branch> op = branchDao.getBranchById(id);
+		Optional<Branch> op = branchDao.getBranch(id);
 		if (op.isPresent()) {
 			branchDao.deleteBranch(id);
 
@@ -56,7 +66,7 @@ public class BranchService {
 	public ResponseEntity<ResponseStructure<Branch>> getBranch(int id) {
 		ResponseStructure<Branch> structure = new ResponseStructure<Branch>();
 
-		Optional<Branch> op = branchDao.getBranchById(id);
+		Optional<Branch> op = branchDao.getBranch(id);
 		if (op.isPresent()) {
 			structure.setBody(op.get());
 			structure.setMessage("Id is present");

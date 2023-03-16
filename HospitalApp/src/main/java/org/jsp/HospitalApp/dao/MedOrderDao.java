@@ -21,16 +21,15 @@ public class MedOrderDao {
 		return repository.save(medOrder);
 	}
 
-	public Optional<MedOrder> findById(int id) {
+	public void deleteMedOrder(int id) {
+		repository.deleteById(id);
+	}
+
+	public Optional<MedOrder> getMedOrder(int id) {
 		return repository.findById(id);
 	}
 
-	public void deleteById(int id) {
-		repository.deleteById(id);
-
-	}
-
-	public List<MedOrder> findAll() {
+	public List<MedOrder> getAll() {
 		return repository.findAll();
 	}
 

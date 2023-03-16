@@ -27,7 +27,7 @@ public class EncounterController {
 
 	@PutMapping("/encounter")
 	public ResponseEntity<ResponseStructure<Encounter>> updateEncounter(@RequestBody Encounter encounter) {
-		
+
 		return service.updateEncounter(encounter);
 	}
 
@@ -42,8 +42,7 @@ public class EncounterController {
 	}
 
 	@GetMapping("/encounter/all")
-	public ResponseEntity<ResponseStructure<List<Encounter>>> getAll()
-	{
-		return service.getAll() ;
+	public ResponseEntity<ResponseStructure<List<Encounter>>> getAll() {
+		return service.getAll();
 	}
 }

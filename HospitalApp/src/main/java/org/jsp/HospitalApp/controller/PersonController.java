@@ -35,12 +35,12 @@ public class PersonController {
 	}
 
 	@GetMapping("/person/{id}")
-	public ResponseEntity<ResponseStructure<Person>> findPersonById(@PathVariable int id) {
-		return service.findPersonById(id);
+	public ResponseEntity<ResponseStructure<Person>> getPerson(@PathVariable int id) {
+		return service.getPerson(id);
 	}
 
 	@GetMapping("/person/all")
-	public ResponseEntity<ResponseStructure<List<Person>>> findAllPerson() {
-		return service.findAllPerson();
+	public ResponseEntity<ResponseStructure<List<Person>>> getAll() {
+		return service.getAll();
 	}
 }
