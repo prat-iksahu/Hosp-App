@@ -18,31 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AddressController {
 	@Autowired
-	AddressService service;
+	AddressService addressService;
 
 	@PostMapping("/address")
 	public ResponseEntity<ResponseStructure<Address>> saveAddress(@RequestBody Address address) {
-		return service.saveAddress(address);
+		return addressService.saveAddress(address);
 	}
 
 	@PutMapping("/address")
 	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address) {
-		return service.updateAddress(address);
+		return addressService.updateAddress(address);
 	}
 
 	@DeleteMapping("/address/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteAddress(@PathVariable int id) {
-		return service.deleteAddress(id);
+		return addressService.deleteAddress(id);
 	}
 
 	@GetMapping("/address/{id}")
 	public ResponseEntity<ResponseStructure<Address>> getAddress(@PathVariable int id) {
-		return service.getAddress(id);
+		return addressService.getAddress(id);
 	}
 
 	@GetMapping("/address/all")
 
 	public ResponseEntity<ResponseStructure<List<Address>>> getAll() {
-		return service.getAll();
+		return addressService.getAll();
 	}
 }

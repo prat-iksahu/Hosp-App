@@ -18,31 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EncounterController {
 	@Autowired
-	EncounterService service;
+	EncounterService encounterService;
 
 	@PostMapping("/encounter")
 	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@RequestBody Encounter encounter) {
-		return service.saveEncounter(encounter);
+		return encounterService.saveEncounter(encounter);
 	}
 
 	@PutMapping("/encounter")
 	public ResponseEntity<ResponseStructure<Encounter>> updateEncounter(@RequestBody Encounter encounter) {
 
-		return service.updateEncounter(encounter);
+		return encounterService.updateEncounter(encounter);
 	}
 
 	@DeleteMapping("/encounter/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteEncounter(@PathVariable int id) {
-		return service.deleteEnconter(id);
+		return encounterService.deleteEnconter(id);
 	}
 
 	@GetMapping("/encounter/{id}")
 	public ResponseEntity<ResponseStructure<Encounter>> getEncounter(@PathVariable int id) {
-		return service.getEncounter(id);
+		return encounterService.getEncounter(id);
 	}
 
 	@GetMapping("/encounter/all")
 	public ResponseEntity<ResponseStructure<List<Encounter>>> getAll() {
-		return service.getAll();
+		return encounterService.getAll();
 	}
 }

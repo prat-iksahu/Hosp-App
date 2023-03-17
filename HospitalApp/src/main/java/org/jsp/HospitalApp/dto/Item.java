@@ -1,5 +1,7 @@
 package org.jsp.HospitalApp.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,5 +19,10 @@ public class Item {
 	private double price;
 	@ManyToOne
 	private MedOrder medOrder;
+
+	@JsonIgnore
+	public MedOrder getMedOrder() {
+		return medOrder;
+	}
 
 }

@@ -18,31 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ItemController {
 	@Autowired
-	ItemService service;
+	ItemService itemService;
 
 	@PostMapping("/item")
 	public ResponseEntity<ResponseStructure<Item>> saveItem(@RequestBody Item item) {
-		return service.saveItem(item);
+		return itemService.saveItem(item);
 	}
 
 	@PutMapping("/item")
 	public ResponseEntity<ResponseStructure<Item>> updateItem(@RequestBody Item item) {
 
-		return service.updateItem(item);
+		return itemService.updateItem(item);
 	}
 
 	@DeleteMapping("/item/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteItem(@PathVariable int id) {
-		return service.deleteItem(id);
+		return itemService.deleteItem(id);
 	}
 
 	@GetMapping("/item/{id}")
 	public ResponseEntity<ResponseStructure<Item>> getItem(@PathVariable int id) {
-		return service.getItem(id);
+		return itemService.getItem(id);
 	}
 
 	@GetMapping("/item/all")
 	public ResponseEntity<ResponseStructure<List<Item>>> getAll() {
-		return service.getAll();
+		return itemService.getAll();
 	}
 }

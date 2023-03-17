@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MedOrderService {
 	@Autowired
-	MedOrderDao dao;
+	MedOrderDao medOrderDao;
 
 	public ResponseEntity<ResponseStructure<MedOrder>> saveMedOrder(MedOrder medOrder) {
 		ResponseStructure<MedOrder> structure = new ResponseStructure<MedOrder>();
-		structure.setBody(dao.saveMedOrder(medOrder));
+		structure.setBody(medOrderDao.saveMedOrder(medOrder));
 		structure.setMessage("medOrder saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.ACCEPTED);
@@ -27,17 +27,17 @@ public class MedOrderService {
 
 	public ResponseEntity<ResponseStructure<MedOrder>> updateMedOrder(MedOrder medOrder) {
 		ResponseStructure<MedOrder> structure = new ResponseStructure<MedOrder>();
-		structure.setBody(dao.updateMedOrder(medOrder));
+		structure.setBody(medOrderDao.updateMedOrder(medOrder));
 		structure.setMessage("MedOrder update successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.ACCEPTED);
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteMedOrder(int id) {
-		Optional<MedOrder> recMedOrder = dao.getMedOrder(id);
+		Optional<MedOrder> recMedOrder = medOrderDao.getMedOrder(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (recMedOrder.isPresent()) {
-			dao.deleteMedOrder(id);
+			medOrderDao.deleteMedOrder(id);
 			structure.setBody("MedOrder found");
 			structure.setMessage("MedOrder found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -48,7 +48,7 @@ public class MedOrderService {
 	}
 
 	public ResponseEntity<ResponseStructure<MedOrder>> getMedOrder(int id) {
-		Optional<MedOrder> recMedOrder = dao.getMedOrder(id);
+		Optional<MedOrder> recMedOrder = medOrderDao.getMedOrder(id);
 		ResponseStructure<MedOrder> structure = new ResponseStructure<MedOrder>();
 		if (recMedOrder.isPresent()) {
 			structure.setBody(recMedOrder.get());
@@ -62,7 +62,7 @@ public class MedOrderService {
 
 	public ResponseEntity<ResponseStructure<List<MedOrder>>> getAll() {
 		ResponseStructure<List<MedOrder>> structure = new ResponseStructure<List<MedOrder>>();
-		structure.setBody(dao.getAll());
+		structure.setBody(medOrderDao.getAll());
 		structure.setMessage("List of MedOrder ");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<MedOrder>>>(structure, HttpStatus.FOUND);

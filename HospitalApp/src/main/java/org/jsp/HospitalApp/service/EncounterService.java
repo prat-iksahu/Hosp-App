@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 
 public class EncounterService {
 	@Autowired
-	EncounterDao dao;
+	EncounterDao encounterDao;
 
 	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(Encounter encounter) {
 		ResponseStructure<Encounter> structure = new ResponseStructure<Encounter>();
-		structure.setBody(dao.saveEncounter(encounter));
+		structure.setBody(encounterDao.saveEncounter(encounter));
 		structure.setMessage("Encounter saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Encounter>>(structure, HttpStatus.ACCEPTED);
@@ -28,7 +28,7 @@ public class EncounterService {
 
 	public ResponseEntity<ResponseStructure<Encounter>> updateEncounter(Encounter encounter) {
 		ResponseStructure<Encounter> structure = new ResponseStructure<Encounter>();
-		structure.setBody(dao.updateEncounter(encounter));
+		structure.setBody(encounterDao.updateEncounter(encounter));
 		structure.setMessage("Encounter Updated successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Encounter>>(structure, HttpStatus.ACCEPTED);
@@ -36,9 +36,9 @@ public class EncounterService {
 
 	public ResponseEntity<ResponseStructure<String>> deleteEnconter(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
-		Optional<Encounter> recEncounter = dao.getEncounter(id);
+		Optional<Encounter> recEncounter = encounterDao.getEncounter(id);
 		if (recEncounter.isPresent()) {
-			dao.deleteEncounter(id);
+			encounterDao.deleteEncounter(id);
 			structure.setBody("Encounter found");
 			structure.setMessage("Encounter found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -51,7 +51,7 @@ public class EncounterService {
 
 	public ResponseEntity<ResponseStructure<Encounter>> getEncounter(int id) {
 		ResponseStructure<Encounter> structure = new ResponseStructure<Encounter>();
-		Optional<Encounter> recEncounter = dao.getEncounter(id);
+		Optional<Encounter> recEncounter = encounterDao.getEncounter(id);
 		if (recEncounter.isPresent()) {
 			structure.setBody(recEncounter.get());
 			structure.setMessage("Encounter found ");
@@ -64,7 +64,7 @@ public class EncounterService {
 
 	public ResponseEntity<ResponseStructure<List<Encounter>>> getAll() {
 		ResponseStructure<List<Encounter>> structure = new ResponseStructure<List<Encounter>>();
-		structure.setBody(dao.getAll());
+		structure.setBody(encounterDao.getAll());
 		structure.setMessage("List of Encounter ");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<Encounter>>>(structure, HttpStatus.FOUND);

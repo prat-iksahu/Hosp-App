@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PersonController {
 	@Autowired
-	PersonService service;
+	PersonService personService;
 
 	@PostMapping("/person")
 	public ResponseEntity<ResponseStructure<Person>> savePerson(@RequestBody Person person) {
-		return service.savePerson(person);
+		return personService.savePerson(person);
 	}
 
 	@PutMapping("/person")
 	public ResponseEntity<ResponseStructure<Person>> updatePerson(@RequestBody Person person) {
-		return service.updatePerson(person);
+		return personService.updatePerson(person);
 	}
 
 	@DeleteMapping("/person/{id}")
 	public ResponseEntity<ResponseStructure<String>> deletePerson(@PathVariable int id) {
-		return service.deletePerson(id);
+		return personService.deletePerson(id);
 	}
 
 	@GetMapping("/person/{id}")
 	public ResponseEntity<ResponseStructure<Person>> getPerson(@PathVariable int id) {
-		return service.getPerson(id);
+		return personService.getPerson(id);
 	}
 
 	@GetMapping("/person/all")
 	public ResponseEntity<ResponseStructure<List<Person>>> getAll() {
-		return service.getAll();
+		return personService.getAll();
 	}
 }

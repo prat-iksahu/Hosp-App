@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonService {
 	@Autowired
-	PersonDao dao;
+	PersonDao personDao;
 
 	public ResponseEntity<ResponseStructure<Person>> savePerson(Person person) {
 		ResponseStructure<Person> structure = new ResponseStructure<Person>();
-		structure.setBody(dao.savePerson(person));
+		structure.setBody(personDao.savePerson(person));
 		structure.setMessage("Person saved successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Person>>(structure, HttpStatus.ACCEPTED);
@@ -27,17 +27,17 @@ public class PersonService {
 
 	public ResponseEntity<ResponseStructure<Person>> updatePerson(Person person) {
 		ResponseStructure<Person> structure = new ResponseStructure<Person>();
-		structure.setBody(dao.updatePerson(person));
+		structure.setBody(personDao.updatePerson(person));
 		structure.setMessage("Person update successfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Person>>(structure, HttpStatus.ACCEPTED);
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deletePerson(int id) {
-		Optional<Person> recPerson = dao.getPerson(id);
+		Optional<Person> recPerson = personDao.getPerson(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (recPerson.isPresent()) {
-			dao.deletePerson(id);
+			personDao.deletePerson(id);
 			structure.setBody("Person found");
 			structure.setMessage("Person found and deleted successfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -48,7 +48,7 @@ public class PersonService {
 	}
 
 	public ResponseEntity<ResponseStructure<Person>> getPerson(int id) {
-		Optional<Person> recPerson = dao.getPerson(id);
+		Optional<Person> recPerson = personDao.getPerson(id);
 		ResponseStructure<Person> structure = new ResponseStructure<Person>();
 		if (recPerson.isPresent()) {
 			structure.setBody(recPerson.get());
@@ -62,7 +62,7 @@ public class PersonService {
 
 	public ResponseEntity<ResponseStructure<List<Person>>> getAll() {
 		ResponseStructure<List<Person>> structure = new ResponseStructure<List<Person>>();
-		structure.setBody(dao.getAll());
+		structure.setBody(personDao.getAll());
 		structure.setMessage("List of Person ");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<Person>>>(structure, HttpStatus.FOUND);

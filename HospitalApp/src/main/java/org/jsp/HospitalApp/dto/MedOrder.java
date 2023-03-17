@@ -2,6 +2,8 @@ package org.jsp.HospitalApp.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +15,7 @@ import lombok.Data;
 @Entity
 @Data
 public class MedOrder {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -22,4 +25,8 @@ public class MedOrder {
 	@ManyToOne
 	private Encounter encounter;
 
+	@JsonIgnore
+	public Encounter getEncounter() {
+		return encounter;
+	}
 }
