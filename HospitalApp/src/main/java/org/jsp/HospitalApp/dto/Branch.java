@@ -2,6 +2,8 @@ package org.jsp.HospitalApp.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,5 +31,10 @@ public class Branch {
 	private List<Admin> admin;
 	@OneToMany
 	private List<Staff> staffs;
+
+	@JsonIgnore
+	public Hospital getHospital() {
+		return hospital;
+	}
 
 }

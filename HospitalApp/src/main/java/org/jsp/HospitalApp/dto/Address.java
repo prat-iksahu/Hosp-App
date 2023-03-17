@@ -1,5 +1,7 @@
 package org.jsp.HospitalApp.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,4 +19,9 @@ public class Address {
 	private int pincode;
 	@OneToOne
 	private Branch branch;
+
+	@JsonIgnore
+	public Branch getBranch() {
+		return branch;
+	}
 }

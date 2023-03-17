@@ -19,30 +19,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AdminController {
 	@Autowired
-	private AdminService service;
+	private AdminService adminService;
 
 	@PostMapping("/admin")
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin) {
-		return service.saveAdmin(admin);
+		return adminService.saveAdmin(admin);
 	}
 
 	@PutMapping("/admin")
 	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin) {
-		return service.updateAdmin(admin);
+		return adminService.updateAdmin(admin);
 	}
 
 	@DeleteMapping("/admin/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteAdmin(@PathVariable int id) {
-		return service.deleteAdmin(id);
+		return adminService.deleteAdmin(id);
 	}
 
 	@GetMapping("/admin/{id}")
 	public ResponseEntity<ResponseStructure<Admin>> getAdmin(@PathVariable int id) {
-		return service.getAdmin(id);
+		return adminService.getAdmin(id);
 	}
 
 	@GetMapping("/admin/all")
 	public ResponseEntity<ResponseStructure<List<Admin>>> getAll() {
-		return service.getAll();
+		return adminService.getAll();
 	}
 }

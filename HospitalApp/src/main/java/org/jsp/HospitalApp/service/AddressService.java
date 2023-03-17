@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddressService {
 	@Autowired
-	AddressDao dao;
+	AddressDao addressDao;
 
 	public ResponseEntity<ResponseStructure<Address>> saveAddress(Address address) {
 		ResponseStructure<Address> structure = new ResponseStructure<Address>();
-		structure.setBody(dao.saveAddress(address));
+		structure.setBody(addressDao.saveAddress(address));
 		structure.setMessage("Address Saved Succesfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Address>>(structure, HttpStatus.ACCEPTED);
@@ -27,17 +27,17 @@ public class AddressService {
 
 	public ResponseEntity<ResponseStructure<Address>> updateAddress(Address address) {
 		ResponseStructure<Address> structure = new ResponseStructure<Address>();
-		structure.setBody(dao.updateAddress(address));
+		structure.setBody(addressDao.updateAddress(address));
 		structure.setMessage("Address Updated Succesfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Address>>(structure, HttpStatus.ACCEPTED);
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteAddress(int id) {
-		Optional<Address> op = dao.getAddress(id);
+		Optional<Address> op = addressDao.getAddress(id);
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		if (op.isPresent()) {
-			dao.deleteAddress(id);
+			addressDao.deleteAddress(id);
 			structure.setBody("Address Found");
 			structure.setMessage("Address found and deleted succesfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -47,7 +47,7 @@ public class AddressService {
 	}
 
 	public ResponseEntity<ResponseStructure<Address>> getAddress(int id) {
-		Optional<Address> op = dao.getAddress(id);
+		Optional<Address> op = addressDao.getAddress(id);
 		ResponseStructure<Address> structure = new ResponseStructure<Address>();
 		if (op.isPresent()) {
 			structure.setBody(op.get());
@@ -60,7 +60,7 @@ public class AddressService {
 
 	public ResponseEntity<ResponseStructure<List<Address>>> getAll() {
 		ResponseStructure<List<Address>> structure = new ResponseStructure<List<Address>>();
-		structure.setBody(dao.getAll());
+		structure.setBody(addressDao.getAll());
 		structure.setMessage("List of Address");
 		structure.setCode(HttpStatus.FOUND.value());
 		return new ResponseEntity<ResponseStructure<List<Address>>>(structure, HttpStatus.FOUND);

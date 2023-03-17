@@ -18,32 +18,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MedOrderController {
 	@Autowired
-	MedOrderService service;
+	MedOrderService medOrderService;
 
 	@PostMapping("/medOrder")
 	public ResponseEntity<ResponseStructure<MedOrder>> saveMedOrder(@RequestBody MedOrder medOrder) {
-		return service.saveMedOrder(medOrder);
+		return medOrderService.saveMedOrder(medOrder);
 	}
 
 	@PutMapping("/medOrder")
 	public ResponseEntity<ResponseStructure<MedOrder>> updateMedOrder(@RequestBody MedOrder medOrder) {
-		return service.updateMedOrder(medOrder);
+		return medOrderService.updateMedOrder(medOrder);
 	}
 
 	@DeleteMapping("/medOrder/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteMedOrder(@PathVariable int id) {
 
-		return service.deleteMedOrder(id);
+		return medOrderService.deleteMedOrder(id);
 	}
 
 	@GetMapping("/medOrder/{id}")
 	public ResponseEntity<ResponseStructure<MedOrder>> getMedOrder(@PathVariable int id) {
-		return service.getMedOrder(id);
+		return medOrderService.getMedOrder(id);
 	}
 
 	@GetMapping("/medOrder/all")
 	public ResponseEntity<ResponseStructure<List<MedOrder>>> getAll() {
-		return service.getAll();
+		return medOrderService.getAll();
 
 	}
 

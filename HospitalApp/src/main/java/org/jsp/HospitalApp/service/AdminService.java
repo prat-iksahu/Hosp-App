@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService {
 	@Autowired
-	private AdminDao dao;
+	private AdminDao adminDao;
 
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
 		ResponseStructure<Admin> structure = new ResponseStructure<Admin>();
-		structure.setBody(dao.saveAdmin(admin));
+		structure.setBody(adminDao.saveAdmin(admin));
 		structure.setMessage("Admin Saved Succesfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.ACCEPTED);
@@ -27,7 +27,7 @@ public class AdminService {
 
 	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin) {
 		ResponseStructure<Admin> structure = new ResponseStructure<Admin>();
-		structure.setBody(dao.updateAdmin(admin));
+		structure.setBody(adminDao.updateAdmin(admin));
 		structure.setMessage("Admin Updated Succesfully");
 		structure.setCode(HttpStatus.ACCEPTED.value());
 		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.ACCEPTED);
@@ -35,9 +35,9 @@ public class AdminService {
 
 	public ResponseEntity<ResponseStructure<String>> deleteAdmin(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
-		Optional<Admin> op = dao.getAdmin(id);
+		Optional<Admin> op = adminDao.getAdmin(id);
 		if (op.isPresent()) {
-			dao.deleteAdmin(id);
+			adminDao.deleteAdmin(id);
 			structure.setBody("Admin Found");
 			structure.setMessage("Admin found and deleted succesfully");
 			structure.setCode(HttpStatus.FOUND.value());
@@ -47,7 +47,7 @@ public class AdminService {
 	}
 
 	public ResponseEntity<ResponseStructure<Admin>> getAdmin(int id) {
-		Optional<Admin> op = dao.getAdmin(id);
+		Optional<Admin> op = adminDao.getAdmin(id);
 		ResponseStructure<Admin> structure = new ResponseStructure<Admin>();
 		if (op.isPresent()) {
 			structure.setBody(op.get());
@@ -60,7 +60,7 @@ public class AdminService {
 
 	public ResponseEntity<ResponseStructure<List<Admin>>> getAll() {
 		ResponseStructure<List<Admin>> structure = new ResponseStructure<List<Admin>>();
-		structure.setBody(dao.getAll());
+		structure.setBody(adminDao.getAll());
 		structure.setMessage("List of Admin");
 		structure.setCode(HttpStatus.FOUND.value());
 		;

@@ -18,31 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StaffController {
 	@Autowired
-	StaffService service;
+	StaffService staffService;
 
-	@PostMapping("/staff")
-	public ResponseEntity<ResponseStructure<Staff>> saveStaff(@RequestBody Staff staff) {
-		return service.saveStaff(staff);
+	@PostMapping("/staff/{bid}")
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(@RequestBody Staff staff, @PathVariable int bid) {
+		return staffService.saveStaff(staff, bid);
 	}
 
 	@PutMapping("/staff")
 	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff) {
-		return service.updateStaff(staff);
+		return staffService.updateStaff(staff);
 	}
 
 	@DeleteMapping("/staff/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteStaff(@PathVariable int id) {
 
-		return service.deleteStaff(id);
+		return staffService.deleteStaff(id);
 	}
 
 	@GetMapping("/staff/{id}")
 	public ResponseEntity<ResponseStructure<Staff>> getStaff(@PathVariable int id) {
-		return service.getStaff(id);
+		return staffService.getStaff(id);
 	}
 
 	@GetMapping("/staff/all")
 	public ResponseEntity<ResponseStructure<List<Staff>>> getAll() {
-		return service.getAll();
+		return staffService.getAll();
 	}
 }
